@@ -1,0 +1,27 @@
+{
+    "name": "Italian Cuisine",
+    "desc": "Italian cuisine consists of the cooking style and traditional dishes prepared in the Italian",
+    "products": [
+        {
+            "name": "Fiama Pizza",
+            "price": 499.0,
+            "desc": "Italian Sauce + Shredded Mozzarella Cheese ",
+            "isavailable": true,
+            "imgurl": "assets/img/Fiama Pizza.jpg"
+        },
+        {
+            "name": "Chicken Mexicana Pizza",
+            "price": 520.0,
+            "desc": "Marinara Sauce + Shredded Mozzarella Cheese ",
+            "isavailable": true,
+            "imgurl": "assets/img/Chicken Mexicana Pizza.webp"
+        },
+        {
+            "name": "Chicken Kheema Lasagne",
+            "price": 299.0,
+            "desc": "Delicious taste like home",
+            "isavailable": true,
+            "imgurl": "assets/img/Chicken Kheema Lasagne.webp"
+        }
+    ]
+}

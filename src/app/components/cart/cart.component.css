@@ -1,0 +1,7 @@
+body
+{
+    background-color: #eee;
+}
+.cart-heading:active{
+    border: 0;
+}

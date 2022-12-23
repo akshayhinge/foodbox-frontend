@@ -1,0 +1,81 @@
+<app-slides ></app-slides>
+
+
+<div class="contaniner-fluid d-flex">
+    <div class="contentview w-100">
+        <div class="content-title d-flex justify-content-between">
+            <div class="name" *ngIf="!itemsTitle">
+                {{categoryname.toUpperCase()}}
+            </div>
+            <div class="name" *ngIf="itemsTitle">
+                All Cuisines
+            </div>
+            <div class="filterwrap d-flex">
+                <div class="filter">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle fs-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Filter
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><button class="dropdown-item " (click)="allitems()">All Cuisine</button></li>
+                          <hr class="m-0">
+                          <li><button class="dropdown-item" (click)="filtering('Indian Cuisine')">Indian Cuisine</button></li>
+                          <li><button class="dropdown-item" (click)="filtering('American Cuisine')">American Cuisine</button></li>
+                          <li><button class="dropdown-item" (click)="filtering('Italian Cuisine')">Italian Cuisine</button></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="sort">
+                    <div class="dropdown">
+                        <button class="btn  dropdown-toggle fs-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Sort
+                          <i class="bi bi-arrow-down-up fs-6"></i>
+                          <i class="bi bi-arrow-up-down fs-6"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><button class="dropdown-item" (click)="sorting('price')">
+                            Price
+                            <i class="bi bi-arrow-down" *ngIf="!reverseOrder"></i>
+                            <i class="bi bi-arrow-up" *ngIf="reverseOrder"></i>
+                        </button></li>
+                        </ul>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+        <hr class="m-0">
+        <div class="">
+            <div class="contentwarp p-2">
+                <div class="content card m-2" *ngFor="let product of products  | filter : searchvalue:'name' | sort : sortBy : reverseOrder" 
+                [ngStyle]="{'color':!product.isavailable ? 'gray' : '' ,'filter':true ? 'grayscale' : ''} " >
+                        <div class="card-img-wrap">
+                            <img src="{{product.imgurl}}" class="card-img-top" alt="image"
+                                [ngStyle]="{'filter':!product.isavailable ? 'grayscale(1)' : ''}">
+                        </div>
+                        <div class="card-body px-3  pt-3">
+                            <h5 class="card-title fs-5">{{product.name| uppercase}}</h5>
+                            <p class="card-text">{{product.desc| titlecase}}</p>
+                            <p class="m-0">M.R.P <strong>{{product.price|currency:'INR'}}</strong> </p>
+                            <p *ngIf="!product.isavailable" style="color: #ff0000c7;margin: 0;">Currently Not Available</p>
+                        </div>
+                        <div class="card-footer text-center p-0">
+                            <button class="btn btn-outline-dark w-100 rounded-0 border-white" (click)="addtocartclick(product.id,product)"
+                                *ngIf="!cartbtnshow[product.id] else qtybtns" [disabled]=!product.isavailable>Add to
+                                Cart</button>
+                            <ng-template #qtybtns>
+                                <div class="d-flex justify-content-around align-items-center">
+                                    <i class="bi bi-dash-circle fs-1" (click)="rmvqty(product)"></i>
+                                    <p class="m-0 fs-4">{{product.qty}}</p>
+                                    <i class="bi bi-plus-circle-fill fs-1" (click)="addqty(product)"></i>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="notFound" *ngIf="">
+                        <img src="assets\img\food not found gif.webp" alt="" class="card-img">
+                    </div>
+            </div>
+        </div>
+    </div>
+    </div>

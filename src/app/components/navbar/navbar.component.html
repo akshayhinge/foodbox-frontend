@@ -1,0 +1,240 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <!-- Container wrapper -->
+  <div class="container-fluid px-3">
+    <!-- Toggle button -->
+    <div class="collapes-btn ">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" #collapsebtn>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand logo-->
+      <div class="logowrapper">
+        <a class="navbar-brand mt-2 mt-lg-0 m-auto" routerLink="/adminhome" *ngIf="isvalidAdmin; else elsepart">𝔽𝕆𝕆𝔻𝔹𝕆𝕏 </a>
+        <ng-template #elsepart>
+        <a class="navbar-brand mt-2 mt-lg-0 m-auto" routerLink="" >𝔽𝕆𝕆𝔻𝔹𝕆𝕏 </a>
+        </ng-template>
+      </div>
+      <!-- search box -->
+      <div class="searchboxwrapper nav-item m-auto">
+        <form class=" search-box-form d-flex" role="search">
+          <input class="form-control form-control-lg dropdown-toggle" type="search" placeholder="Search" aria-label="Search"
+            #searchvalue id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+          <button class="btn w-auto" type="submit" (click)="search(searchvalue.value)">
+            <i class="bi bi-search nav-link"></i>
+          </button> 
+        </form>
+        <div class="dropdown dropdown-menu dropdown-menu-right bg-dark nav-item"  aria-labelledby="dropdownMenu2">
+          <a class="dropdown-item " routerLink="">Profile</a>
+          <a class="dropdown-item" routerLink="" data-bs-toggle="modal" data-bs-target="#passwordModel">Change
+            Password</a>
+            <a class="dropdown-item" routerLink="">My Orders</a>
+          <div class="dropdown-divider bg-light m-0"></div>
+          <a class="dropdown-item ">Logout</a>
+        </div>
+      </div>
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    <div class="rightside ">
+      <!-- Icon -->
+      <div class="d-flex cartwrapper align-items-center" *ngIf="isvalidUser || isvalidAdmin">
+        <div class="minicart" *ngIf="!isvalidAdmin">
+          <a class="bi bi-cart2 position-relative fs-4" routerLink="cart">
+            <span class="position-absolute translate-middle badge rounded-pill bg-danger">{{totalitems}}</span>
+          </a>
+        </div>
+        <div class="profilewrapper btn-group">
+          <div class="dropdown">
+            <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <img src="assets\img\userphoto.webp" alt="profile">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right bg-dark nav-item" aria-labelledby="dropdownMenu2">
+              <a class="dropdown-item " routerLink="">Profile</a>
+              <a class="dropdown-item" routerLink="" data-bs-toggle="modal" data-bs-target="#passwordModel">Change
+                Password</a>
+                <a class="dropdown-item" routerLink="" *ngIf="isvalidUser" >My Orders</a>
+                <a class="dropdown-item" routerLink="" *ngIf="isvalidAdmin" >Orders</a>
+              <div class="dropdown-divider bg-light m-0"></div>
+              <a class="dropdown-item " (click)="logout()">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="loginbtn " *ngIf="!isvalidUser && !isvalidAdmin">
+        <a class="btn btn-outline-light" data-bs-toggle="offcanvas" data-bs-target="#loginoffcanvas" aria-controls="loginoffcanvas" id="loginbtn">Login</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- offcanvas for login  -->
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="loginoffcanvas" >
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" id="loginoffcanvasclosebtn"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="loginformwrap px-md-5 mt-4">
+      <div class="heading text-center" >
+        <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+        <p class="text-white-50 mb-5">Please enter your Mobile Number and password!</p>
+      </div>
+      <form [formGroup]="loginForm">
+        <div class="inputboxes">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <div class="d-flex">
+                  <i class="bi bi-person-fill fs-3"></i>
+                  <input type="text" id="loginphonenoinput" class="form-control" placeholder="Enter Phone Number" formControlName="loginphoneno"
+                    [ngStyle]="{'border-color': loginphoneno && loginphoneno.invalid && loginphoneno.touched ? '#fe8686': null }"  />
+                
+                </div>
+                <span *ngIf="loginphoneno && loginphoneno.invalid && loginphoneno.touched"
+                  style="margin-left: 30px; color: #ff0000; font-size: 0.8rem;">
+                  Enter Valid phone number
+                </span>
+            </div>
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <div class="d-flex">
+                    <i class="bi bi-key-fill fs-3"></i>
+                    <input type="password" id="loginpasswordinput" class="form-control" placeholder="Enter Password "
+                        formControlName="loginpassword"
+                        [ngStyle]="{'border-color': loginpassword && loginpassword.invalid && loginpassword.touched ? '#fe8686': null }" />
+                </div>
+                <span *ngIf="loginpassword && loginpassword.invalid && loginpassword.touched"
+                    style="margin-left: 30px; color: #ff0000; font-size: 0.8rem;">Enter a valid password</span>
+            </div>
+        </div>
+        <!-- remember me btn -->
+        <div class="row mb-4">
+            <div class="col d-flex justify-content-center">
+                <!-- Checkbox -->
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="rememberme" checked />
+                    <label class="form-check-label" for="rememberme"> Remember me </label>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-outline-light btn-block  w-100" [disabled]="loginForm.invalid"
+        (click)="userlogin()">Login</button>
+        
+        <span *ngIf="!isvalidUser && loginbtnclick" style="margin-left: 30px; color: #ff0000; font-size: 0.8rem;">Username and Password is not valid
+        </span>
+        <!-- Register buttons -->
+        <div class="text-center mt-3">
+            <p>Don't have an account? <a data-bs-toggle="offcanvas" data-bs-target="#signupoffcanvas" aria-controls="signupoffcanvas" class="text-primary">SignUp</a></p>
+  
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+<!-- register offcanvas -->
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="signupoffcanvas">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="signupformwrapper px-md-5 mt-4">
+      <div class="heading text-center" >
+        <h2 class="fw-bold mb-2 text-uppercase">SignUp</h2>
+        <p class="text-white-50 mb-4">Please enter your Details!</p>
+      </div>
+      <form [formGroup]="registerform">
+        <div class="inputboxes ">
+          <div class="form-outline mb-4">
+            <div class="d-flex">
+              <i class="bi bi-person-fill fs-3 me-1"></i>
+              <input type="text" id="fnameinput" class="form-control" placeholder="Enter First Name" formControlName="fname"
+                [ngStyle]="{'border-color' : fname && fname.invalid && fname.touched ? '#fe8686': null }" required=""/>
+            </div>
+            <span *ngIf="fname && fname.invalid && fname.touched" style="margin-left: 30px; color: #ff0000; font-size: 0.8rem;">Enter a valid
+              Name</span>
+          </div>
+          <div class="form-outline mb-4">
+            <div class="d-flex">
+              <i class="bi bi-person-fill fs-3 me-1"></i>
+              <input type="text" id="lnameinput" class="form-control" placeholder="Enter Last Name"
+                formControlName="lname"
+                [ngStyle]="{'border-color': lname && lname.invalid && lname.touched ? '#fe8686': null }" required=""/>
+            </div>
+            <span *ngIf="lname && lname.invalid && lname.touched" style="margin-left: 30px; color: #ff0000; font-size: 0.8rem;">Enter a valid
+              Name</span>
+          </div>
+          <div class="form-outline mb-4">
+            <div class="d-flex ">
+              <i class="bi bi-phone-fill fs-4 me-1"></i>
+              <input type="text" id="phonenoinput" class="form-control" placeholder="Enter Phone Number" formControlName="phoneno"
+                [ngStyle]="{'border-color': phoneno && phoneno.invalid && phoneno.touched ? '#fe8686': null }" required=""/>
+            </div>
+            <span *ngIf="phoneno && phoneno.invalid && phoneno.touched"
+              style="margin-left: 30px; color: #ff0000; font-size: 0.8rem;">Enter a valid
+              Phone Number</span>
+            <span *ngIf="alreadyuser " style="margin-left: 30px; white-space: nowrap; color: #ff0000; font-size: 0.8rem;">
+              Phone Number is Already used.</span>
+          </div> 
+          <div class="form-outline mb-4">
+            <div class="d-flex flex-row">
+              <i class="bi bi-key-fill fs-3 me-1"></i>
+              <input type="password" id="passwordinput" class="form-control" placeholder="Enter Password "
+                formControlName="password"
+                [ngStyle]="{'border-color': password && password.invalid && password.touched ? '#fe8686': null }" required=""/>
+            </div>
+            <span *ngIf="password && password.invalid && password.touched"
+              style="margin-left: 30px; color: #ff0000;font-size: 0.8rem;">Enter a valid Password</span>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col d-flex justify-content-center">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="termschecked" checked
+                formControlName="terms" />
+              <label class="form-check-label " for="termschecked">
+                I agree all statements in <a href="">Terms of service</a> </label>
+            </div>
+          </div>
+          <span *ngIf="terms && terms.invalid && terms.touched"
+            style="margin-left: 30px; color: #ff0000; text-align: center; font-size: 0.8rem;">checked Terms and condition</span>
+  
+        </div>
+  
+        <!-- Submit button -->        
+        <button class="btn btn-primary btn-block mb-4 w-100" [disabled]="registerform.invalid"
+           (click)="userregister()"><div class="spinner-border spinner-border-sm" role="status" *ngIf="spinnerbtn"></div>Register</button>
+  
+        <!-- Login buttons -->
+        <div class="text-center">
+          <p>Already have account? <a data-bs-toggle="offcanvas" data-bs-target="#loginoffcanvas" aria-controls="loginoffcanvas" class="text-primary">Login</a></p>
+          <hr>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- registration success msg modal -->
+<button type="button" data-bs-toggle="modal" data-bs-target="#successmodel" hidden id="successbtn">
+</button>
+  <div class="modal fade" id="successmodel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="closebtn" style="text-align: right;">
+                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"
+                        #closebutton></button>
+                </div>
+                <div class="thank-you-pop text-center ">
+                    <img src="assets\img\Green-Round-Tick.png" alt="">
+                    <h1>Registration Success </h1>
+                    <p>Congratulations, Your account has been successfully created. </p>
+  
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

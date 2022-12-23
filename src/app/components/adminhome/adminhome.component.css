@@ -1,0 +1,6 @@
+@media only screen and (max-width: 400px) {
+    .card-md table,button{
+        font-size: 0.5rem;
+    }
+    
+}

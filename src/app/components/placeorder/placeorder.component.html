@@ -1,0 +1,92 @@
+<section class="h-100vh" style="background-color: #ddd;">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-10">
+                <div class="card bg-dark text-white rounded-3 ">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Order Summary</h5>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Name</p>
+                            <p class="mb-2">{{userdata.fname | titlecase}} {{userdata.lname | titlecase}}</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Phone No</p>
+                            <p class="mb-2">{{userdata.phoneno}}</p>
+                        </div>
+                        
+                        <!-- <div class="d-flex justify-content-between">
+                            <p class="mb-2">Shipping Address</p>
+                            <p class="mb-2">{{userdata.address}}</p>
+                        </div> -->
+                        
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2"> <label for="paymentmode">Payment Mode</label></p>
+                            <p class="mb-2">COD</p>
+                            <!-- <p>
+                                <select class="small form-select bg-dark text-light" id="paymentmode"[(ngModel)]="paymode" required>
+                                    <option  value="" disabled selected>Choose Option</option>
+                                    <option value="Card" >Card</option>
+                                    <option  value="COD">COD</option>
+                                </select>
+                                   
+                            </p> -->
+                        </div>
+
+                        <hr class="my-2">
+
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Subtotal</p>
+                            <p class="mb-2">{{usercart.totalamount | currency:'INR'}}</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Shipping</p>
+                            <p class="mb-2">{{10/100*usercart.totalamount | currency:'INR'}}</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4">
+                            <p class="mb-2">Total(Incl. taxes)</p>
+                            <p class="mb-2">{{(10/100*usercart.totalamount)+usercart.totalamount | currency:'INR'}}</p>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-light w-100  btn-block btn-lg"  (click)="placeorder()">
+                            <div class="spinner-border spinner-border-sm" role="status" *ngIf="spinnerbtn"></div>Place Order 
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<button type="button" data-bs-toggle="modal" id="placeorder" data-bs-target="#successmodal" hidden> Place Order</button>
+<!-- order success Modal -->
+<div class="modal fade" id="successmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+            </div> -->
+            <div class="modal-body">
+                <div class="closebtn" style="text-align: right;">
+                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"
+                        #closebutton></button>
+
+                </div>
+                <div class="thank-you-pop text-center ">
+                    <img src="assets/img/Green-Round-Tick.png" alt="">
+                    <h1>Order Place </h1>
+                    <p>Your Order has been confirmed.It will be delivered soon.</p>
+                    <h3 class="cupon-pop">
+                        <a class="btn btn-success" data-bs-dismiss="modal" >Back to home
+                            </a></h3>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

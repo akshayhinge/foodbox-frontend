@@ -1,0 +1,94 @@
+/* search box css */
+.searchboxwrapper .search-box-form:focus {
+    border-color: #ced4da;
+    box-shadow: 0 0 0 0.2rem rgba(66, 66, 66, 0.768);
+}
+.searchboxwrapper .search-box-form .form-control, .form-control:focus, button:active {
+    border-color: none;
+    border-radius: 0%;
+    border: none;
+    box-shadow: 0 0 0 0.0rem rgba(0, 0, 0, 0);
+    width: 400px;
+
+}
+
+.searchboxwrapper .search-box-form button {
+   background: black;
+   color: #ffff;
+   border: none;
+   border-radius: 0%;
+}
+.searchboxwrapper .search-box-form {
+    font-family: emoji;
+    border-color: #ffff;
+    box-shadow: 0 0 0 0.1rem rgba(255, 255, 255, 0.30);
+    border: none;
+}
+
+/* Right side of navbar */
+.navbar .rightside .minicart a,span{
+   color: #ffff;
+   font-size:09px;
+}
+.navbar .rightside .minicart{
+    padding: 10px;
+}
+.navbar .rightside .minicart .translate-middle{
+    transform: translate(-50%,0%)!important;
+
+}
+.navbar .rightside .cartwrapper img{
+    width: 1.8rem;
+    border: 1px solid #ffff;
+    border-radius: 50%;
+}
+.profilewrapper {
+    padding-left:8px;
+}
+.profilewrapper a::after{
+    color: #ffff;
+    font-size: 1.5rem;
+}
+.nav-link:hover {
+    cursor: pointer;
+}
+.profilewrapper .dropdown:hover .dropdown-menu {
+    font-family: sans-serif;
+    display: block;
+    margin-top: 0;
+    padding: 0;
+    right: 0;
+    border-radius: 0%;
+}
+.profilewrapper .dropdown:hover .dropdown-menu .dropdown-item{
+color: #ffff;
+}
+.profilewrapper .dropdown:hover .dropdown-menu .dropdown-item:active{
+    color: #ffff;
+    background-color: rgb(0, 0, 0);
+}
+.profilewrapper .dropdown:hover .dropdown-menu .dropdown-item:hover{
+    color: rgb(0, 0, 0);
+}
+a:hover{
+cursor: pointer;
+}
+
+@media only screen and (max-width: 988px) {
+    /* For mobile phones: */
+    .searchboxwrapper .search-box-form .form-control{
+        width: 100%;
+    }
+    .logowrapper{
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .navbar .rightside .loginbtn{
+        padding: 10px 0px;
+    }
+    .navbar .container-fluid{
+        padding: 0;
+    }
+}
+
